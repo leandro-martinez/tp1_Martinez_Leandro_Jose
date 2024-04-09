@@ -13,7 +13,7 @@ public class Main {
 		if(numero < 1 || numero > 9) {
 			System.out.println("El numero debe estar dentro del rango [1,9]");
 		} else {
-			for(int i = 1; i <= 10; i++) {
+			for(int i = 0; i <= 10; i++) {
 				System.out.println(numero + " * " + i + " = " + numero * i);
 			}
 		}
