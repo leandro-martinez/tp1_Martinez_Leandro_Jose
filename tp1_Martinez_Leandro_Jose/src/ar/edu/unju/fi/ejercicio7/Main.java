@@ -23,7 +23,7 @@ public class Main {
         empleado.darAumento();
         System.out.println("----------");
         empleado.mostrarDatos();
-        
+        scanner.close();
 	}
 
 }

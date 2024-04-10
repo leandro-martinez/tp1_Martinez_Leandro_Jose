@@ -13,7 +13,6 @@ public class Main {
         if (numero < 0 || numero > 10) {
             System.out.println("El número debe estar dentro del rango [0, 10]");
         } else {
-        	scanner.close();
             int factorial = 1;
             int contador = 1;
 

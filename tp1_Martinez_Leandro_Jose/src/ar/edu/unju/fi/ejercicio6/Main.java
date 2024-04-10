@@ -30,6 +30,7 @@ public class Main {
             persona.mostrarDatos();
             System.out.println("----------"); 
         }
+        scanner.close();
 	}
 
 }
