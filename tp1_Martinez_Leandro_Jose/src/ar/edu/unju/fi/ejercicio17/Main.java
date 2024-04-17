@@ -36,7 +36,7 @@ public class Main {
 				break;
 			case 2: System.out.println("Opcion 2");
 				break;
-			case 3: System.out.println("Opcion 3");
+			case 3: mostrarJugadoresPorApellido();;
 				break;
 			case 4: System.out.println("Opcion 4");
 				break;
@@ -53,6 +53,15 @@ public class Main {
 				break;
 			}
 		} while(option !=8);
+	}
+	public static void mostrarJugadoresPorApellido() {
+		if(jugadores.isEmpty()) {
+			System.out.println("Lista vacia...");
+		} else {
+			System.out.println("--------- Lista de jugadores por apellido ----------");
+			jugadores.sort(Comparator.comparing(Jugador::getApellido));
+			jugadores.forEach(player -> System.out.println(player));
+		}
 	}
 	public static void agregarJugador() {
 		Jugador jugador = new Jugador();
@@ -83,7 +92,7 @@ public class Main {
         jugador.setPeso(scanner.nextInt());
         
         System.out.println("Ingrese la posicion del jugador: ");
-        jugador.setPosicion(scanner.nextLine());
+        jugador.setPosicion(scanner.next());
         
         jugadores.add(jugador);
         
