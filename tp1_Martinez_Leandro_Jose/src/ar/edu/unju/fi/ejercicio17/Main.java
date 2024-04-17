@@ -32,7 +32,7 @@ public class Main {
 			scanner.nextLine();
 			
 			switch (option) {
-			case 1: System.out.println("Opcion 1");
+			case 1: agregarJugador();
 				break;
 			case 2: System.out.println("Opcion 2");
 				break;
@@ -53,6 +53,41 @@ public class Main {
 				break;
 			}
 		} while(option !=8);
+	}
+	public static void agregarJugador() {
+		Jugador jugador = new Jugador();
+		Calendar fechaNacimiento = Calendar.getInstance();
+		
+		System.out.println("Ingrese el nombre del jugador: ");
+		jugador.setNombre(scanner.nextLine());
+		
+		System.out.println("Ingrese el apellido del jugador: ");
+		jugador.setApellido(scanner.nextLine());
+		
+		System.out.println("Ingrese la fecha de nacimiento del jugador (dd/mm/yyyy): ");
+		String fechaNacimientoStr = scanner.nextLine();
+        String[] fechaParts = fechaNacimientoStr.split("/");
+        int day = Integer.parseInt(fechaParts[0]);
+        int month = Integer.parseInt(fechaParts[1]) - 1;
+        int year = Integer.parseInt(fechaParts[2]);
+        fechaNacimiento.set(year, month, day);
+        jugador.setFechaDeNacimiento(fechaNacimiento);
+        
+        System.out.println("Ingrese la nacionalidad del jugador: ");
+        jugador.setNacionalidad(scanner.nextLine());
+        
+        System.out.println("Ingrese la estatura en"+ " cm "+"del jugador: ");
+        jugador.setEstatura(scanner.nextInt());
+        
+        System.out.println("Ingrese el peso del jugador: ");
+        jugador.setPeso(scanner.nextInt());
+        
+        System.out.println("Ingrese la posicion del jugador: ");
+        jugador.setPosicion(scanner.nextLine());
+        
+        jugadores.add(jugador);
+        
+        System.out.println("Se agregó un nuevo jugador...");
 	}
 	
 }
