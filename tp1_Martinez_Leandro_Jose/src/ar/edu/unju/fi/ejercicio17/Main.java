@@ -30,9 +30,29 @@ public class Main {
 			
 			option = scanner.nextInt();
 			scanner.nextLine();
-
+			
+			switch (option) {
+			case 1: System.out.println("Opcion 1");
+				break;
+			case 2: System.out.println("Opcion 2");
+				break;
+			case 3: System.out.println("Opcion 3");
+				break;
+			case 4: System.out.println("Opcion 4");
+				break;
+			case 5: System.out.println("Opcion 5");
+				break;
+			case 6: System.out.println("Opcion 6");
+				break;
+			case 7: System.out.println("Opcion 7");
+				break;
+			case 8: System.out.println("Fin del programa...");
+				break;
+			default:
+				System.out.println("Opcion incorrecta");
+				break;
+			}
 		} while(option !=8);
-
 	}
 	
 }
