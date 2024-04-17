@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.ejercicio17.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Jugador {
@@ -25,7 +26,25 @@ public class Jugador {
 		this.posicion = posicion;
 	}
 	
-	
+	@Override
+	public String toString() {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		String fechaDeNacimientoStr = formato.format(this.getFechaDeNacimiento().getTime());
+		return "Jugador [Nombre=" + nombre + ", Edad="+ calcularEdad() + " años" + ", Apellido=" + apellido + ", Fecha de Nacimiento=" + fechaDeNacimientoStr
+				+ ", Nacionalidad=" + nacionalidad + ", Estatura=" + estatura + "cm" + ", Peso=" + peso + "kg" + ", Posicion="
+				+ posicion + "]";
+	}
+
+	public int calcularEdad () {
+		 Calendar fechaActual = Calendar.getInstance();
+		 int edad = fechaActual.get(Calendar.YEAR) - this.getFechaDeNacimiento().get(Calendar.YEAR);
+		 if (fechaActual.get(Calendar.MONTH) < fechaDeNacimiento.get(Calendar.MONTH) ||
+		    (fechaActual.get(Calendar.MONTH) == fechaDeNacimiento.get(Calendar.MONTH) &&
+		     fechaActual.get(Calendar.DAY_OF_MONTH) < fechaDeNacimiento.get(Calendar.DAY_OF_MONTH))) {
+		        edad--;
+		  }
+		 return edad;   
+	}
 	
 	public String getNombre() {
 		return nombre;
