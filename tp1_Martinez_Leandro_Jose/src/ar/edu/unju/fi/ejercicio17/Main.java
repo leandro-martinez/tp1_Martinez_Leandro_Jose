@@ -34,7 +34,7 @@ public class Main {
 			switch (option) {
 			case 1: agregarJugador();
 				break;
-			case 2: System.out.println("Opcion 2");
+			case 2: mostrarDatosJugador();
 				break;
 			case 3: mostrarJugadoresPorApellido();;
 				break;
@@ -110,4 +110,26 @@ public class Main {
         }
 		System.out.println("Cantidad de jugadores con nacionalidad "+ nacionalidadIngresada +": "+ cantidad);
 	}
+	public static void mostrarDatosJugador() {
+		System.out.println("Ingrese nombre del jugador: ");
+		String nombre = scanner.next();
+		System.out.println("Ingrese el apellido del jugador: ");
+		String apellido = scanner.next();
+		
+		boolean encontrado = false;
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNombre().equalsIgnoreCase(nombre) &&
+                jugador.getApellido().equalsIgnoreCase(apellido)) {
+                System.out.println("Jugador encontrado:");
+                System.out.println(jugador);
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No se encontró ningún jugador con esos datos.");
+        }
+
+	}
+	
 }
