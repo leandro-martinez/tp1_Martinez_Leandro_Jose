@@ -42,7 +42,7 @@ public class Main {
 				break;
 			case 5: System.out.println("Opcion 5");
 				break;
-			case 6: System.out.println("Opcion 6");
+			case 6: System.out.println("Total de jugadores: " + jugadores.size());
 				break;
 			case 7: System.out.println("Opcion 7");
 				break;
