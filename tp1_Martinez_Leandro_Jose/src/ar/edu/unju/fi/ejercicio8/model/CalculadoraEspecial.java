@@ -11,7 +11,7 @@ public class CalculadoraEspecial {
 	}
 
 	public Double calcularSumatoria () {
-		double sumatoria = 0.0;
+		double sumatoria = 0;
         for (int k = 1; k <= this.getN(); k++) {
             double termino = (k * (k + 1)) / 2;
             sumatoria += Math.pow(termino, 2);
@@ -21,7 +21,7 @@ public class CalculadoraEspecial {
 	
 	public Double calcularProductoria() {
         double productoria = 1;
-        for (int k = 1; k <= n; k++) {
+        for (int k = 1; k <= this.getN(); k++) {
             productoria *= (k * (k + 4));
         }
         return productoria;
