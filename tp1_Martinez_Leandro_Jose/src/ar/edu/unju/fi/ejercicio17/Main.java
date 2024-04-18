@@ -44,7 +44,7 @@ public class Main {
 				break;
 			case 6: System.out.println("Total de jugadores: " + jugadores.size());
 				break;
-			case 7: System.out.println("Opcion 7");
+			case 7: mostrarJugadoresNacionalidad();
 				break;
 			case 8: System.out.println("Fin del programa...");
 				break;
@@ -98,5 +98,16 @@ public class Main {
         
         System.out.println("Se agregó un nuevo jugador...");
 	}
-	
+	public static void mostrarJugadoresNacionalidad() {
+		System.out.println("Ingrese una nacionalidad: ");
+		String nacionalidadIngresada = scanner.next();
+		int cantidad = 0;
+		
+		for (Jugador jugador : jugadores) {
+            if (jugador.getNacionalidad().equalsIgnoreCase(nacionalidadIngresada)) {
+             cantidad++;   
+            }
+        }
+		System.out.println("Cantidad de jugadores con nacionalidad "+ nacionalidadIngresada +": "+ cantidad);
+	}
 }
