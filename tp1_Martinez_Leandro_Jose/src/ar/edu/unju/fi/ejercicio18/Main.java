@@ -54,7 +54,7 @@ public class Main {
 					break;
 				case 7: mostrarPaises();
 					break;
-				case 8: System.out.println("opcion 8");
+				case 8: mostrarDestinosPorPais();
 					break;
 				case 9: System.out.println("Fin del programa...");
 					break;
@@ -185,5 +185,27 @@ public class Main {
 		System.out.println("--------- Lista de Paises ----------");
 		paises.forEach(pais -> System.out.println(pais));
 	}
-
+	public static void mostrarDestinosPorPais () {
+		if (destinosTuristicos.isEmpty()) {
+		    System.out.println("Lista vacía...");
+		} else {
+		    boolean paisEncontrado = false;
+		    do {
+		        System.out.println("Ingrese el código de un país: ");
+		        String pais = scanner.next();
+		        Iterator<DestinoTuristico> iterator = destinosTuristicos.iterator();
+		        System.out.println("--------- Lista de Destinos Turísticos por Pais ----------");
+		        while (iterator.hasNext()) {
+		            DestinoTuristico destino = iterator.next();
+		            if (destino.getPais().getCodigo().equalsIgnoreCase(pais)) {
+		                System.out.println(destino);
+		                paisEncontrado = true;
+		            }
+		        }
+		        if (!paisEncontrado) {
+		            System.out.println("El país ingresado no se encuentra en la lista. Intente nuevamente.");
+		        }
+		    } while (!paisEncontrado);
+		}
+	}
 }
