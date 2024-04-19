@@ -18,6 +18,12 @@ public class DestinoTuristico {
 		this.cantDias = cantDias;
 	}
 
+	@Override
+	public String toString() {
+		return "DestinoTuristico [codigo=" + codigo + ", nombre=" + nombre + ", precio=" + precio + ", pais=" + pais
+				+ ", cantDias=" + cantDias + "]";
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
