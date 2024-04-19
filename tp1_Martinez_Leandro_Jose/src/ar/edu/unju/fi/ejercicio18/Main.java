@@ -1,11 +1,13 @@
 package ar.edu.unju.fi.ejercicio18;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import ar.edu.unju.fi.ejercicio17.model.Jugador;
 import ar.edu.unju.fi.ejercicio18.model.DestinoTuristico;
 import ar.edu.unju.fi.ejercicio18.model.Pais;
 
@@ -48,7 +50,7 @@ public class Main {
 					break;
 				case 5: eliminarUnDestinoTuristico();
 					break;
-				case 6: System.out.println("opcion 6");
+				case 6: mostrarDestinosPorNombre();
 					break;
 				case 7: mostrarPaises();
 					break;
@@ -96,7 +98,7 @@ public class Main {
 		Pais paisAsociado = null;
 		
 		do {
-			System.out.println("Ingrese el código del destino turistico (país): ");
+			System.out.println("Ingrese el código del país: ");
 			codigoPais = scanner.next();
 		
 			for (Pais pais : paises) {
@@ -108,22 +110,37 @@ public class Main {
 		
         try {
         	destino.setPais(paisAsociado);
+        	
+        	scanner.nextLine();
             System.out.println("Ingrese el codigo del destino turistico: ");
-            destino.setCodigo(scanner.next());
+            destino.setCodigo(scanner.nextLine());
+            
             System.out.println("Ingrese nombre del destino: ");
-            destino.setNombre(scanner.next());
+            destino.setNombre(scanner.nextLine());
+            
             System.out.println("Ingrese el precio: ");
             destino.setPrecio(scanner.nextInt());
+                        
             System.out.println("Ingrese la cantidad de dias: ");
             destino.setCantDias(scanner.nextInt());
             
+            
             destinosTuristicos.add(destino);
+            
             System.out.println("Se agregó un nuevo destino turistico...");
         } catch (InputMismatchException ex) {
         	System.out.println("Tipo de dato no válido");
         }
 	}
-
+	public static void mostrarDestinosPorNombre () {
+		if(destinosTuristicos.isEmpty()) {
+			System.out.println("--------------- Lista vacia --------------");
+		} else {
+			System.out.println("--------- Lista de Destinos turisticos por nombre ----------");
+			destinosTuristicos.sort(Comparator.comparing(DestinoTuristico::getNombre));
+			destinosTuristicos.forEach(destino -> System.out.println(destino));
+		}
+	}
 	public static void eliminarDestinosTuristicos() {
 		destinosTuristicos.clear();
 		System.out.println("Lista de destinos turisticos eliminada...");
