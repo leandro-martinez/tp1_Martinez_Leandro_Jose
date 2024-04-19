@@ -5,14 +5,17 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import ar.edu.unju.fi.ejercicio18.model.DestinoTuristico;
 import ar.edu.unju.fi.ejercicio18.model.Pais;
 
 public class Main {
 	private static Scanner scanner;
 	private static List<Pais> paises;
+	private static List<DestinoTuristico> destinosTuristicos;
 	
 	public static void main(String[] args) {
 		scanner = new Scanner(System.in);
+		destinosTuristicos = new ArrayList<>();
 		precargarPaises();
 		
 		int option = 0;
@@ -34,9 +37,9 @@ public class Main {
 				scanner.nextLine();
 				
 				switch (option) {
-				case 1: System.out.println("opcion 1");
+				case 1: agregarDestino();
 					break;
-				case 2: System.out.println("opcion 2");
+				case 2: mostrarDestinosTuristicos();
 					break;
 				case 3: System.out.println("opcion 3");
 					break;
@@ -60,6 +63,43 @@ public class Main {
 		} catch(InputMismatchException ex){
 			System.out.println("Opcion no válida");
 		}
+	}
+	public static void agregarDestino () {
+		DestinoTuristico destino = new DestinoTuristico();
+		String codigoPais = "";
+		Pais paisAsociado = null;
+		
+		do {
+			System.out.println("Ingrese el código del destino turistico (país): ");
+			codigoPais = scanner.next();
+		
+			for (Pais pais : paises) {
+				if (pais.getCodigo().equalsIgnoreCase(codigoPais)) {
+					paisAsociado = pais;
+				}
+			}
+		} while(paisAsociado == null);
+		
+        try {
+        	destino.setPais(paisAsociado);
+            System.out.println("Ingrese el codigo del destino turistico: ");
+            destino.setCodigo(scanner.next());
+            System.out.println("Ingrese nombre del destino: ");
+            destino.setNombre(scanner.next());
+            System.out.println("Ingrese el precio: ");
+            destino.setPrecio(scanner.nextInt());
+            System.out.println("Ingrese la cantidad de dias: ");
+            destino.setCantDias(scanner.nextInt());
+            
+            destinosTuristicos.add(destino);
+            System.out.println("Se agregó un nuevo destino turistico...");
+        } catch (InputMismatchException ex) {
+        	System.out.println("Tipo de dato no válido");
+        }
+	}
+	public static void mostrarDestinosTuristicos() {
+		System.out.println("----------- Destinos Turisticos ------------");
+		destinosTuristicos.forEach(destino -> System.out.println(destino));
 	}
 	public static void precargarPaises () {
 		if(paises == null) {
