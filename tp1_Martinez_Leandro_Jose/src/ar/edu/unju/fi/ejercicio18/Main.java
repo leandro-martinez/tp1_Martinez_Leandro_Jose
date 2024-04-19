@@ -43,7 +43,7 @@ public class Main {
 					break;
 				case 3: modificarPais();
 					break;
-				case 4: System.out.println("opcion 4");
+				case 4: eliminarDestinosTuristicos();
 					break;
 				case 5: System.out.println("opcion 5");
 					break;
@@ -121,6 +121,10 @@ public class Main {
         } catch (InputMismatchException ex) {
         	System.out.println("Tipo de dato no válido");
         }
+	}
+	public static void eliminarDestinosTuristicos() {
+		destinosTuristicos.clear();
+		System.out.println("Lista de destinos turisticos eliminada...");
 	}
 	public static void mostrarDestinosTuristicos() {
 		System.out.println("----------- Destinos Turisticos ------------");
