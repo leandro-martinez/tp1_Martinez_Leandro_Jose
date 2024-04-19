@@ -2,6 +2,7 @@ package ar.edu.unju.fi.ejercicio18;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,7 +46,7 @@ public class Main {
 					break;
 				case 4: eliminarDestinosTuristicos();
 					break;
-				case 5: System.out.println("opcion 5");
+				case 5: eliminarUnDestinoTuristico();
 					break;
 				case 6: System.out.println("opcion 6");
 					break;
@@ -122,13 +123,38 @@ public class Main {
         	System.out.println("Tipo de dato no válido");
         }
 	}
+
 	public static void eliminarDestinosTuristicos() {
 		destinosTuristicos.clear();
 		System.out.println("Lista de destinos turisticos eliminada...");
 	}
+	public static void eliminarUnDestinoTuristico() {
+		System.out.println("Ingrese el codigo del destino a eliminar: ");
+		String codigoDestino = scanner.next();
+		Boolean destinoEncontrado = false;
+		
+		Iterator<DestinoTuristico> iterator = destinosTuristicos.iterator();	
+		while(iterator.hasNext()) {
+			DestinoTuristico destino = iterator.next();
+			if(destino.getCodigo().equalsIgnoreCase(codigoDestino)) {
+				destinoEncontrado = true;
+			  	iterator.remove();
+				mostrarDestinosTuristicos();
+				System.out.println("------------------");
+				System.out.println("Se eliminó el destino con el codigo: "+ codigoDestino);
+			}
+		}
+		if(!destinoEncontrado) {
+			System.out.println("No se encontró el destino...");
+		}
+	}
 	public static void mostrarDestinosTuristicos() {
-		System.out.println("----------- Destinos Turisticos ------------");
-		destinosTuristicos.forEach(destino -> System.out.println(destino));
+		if(destinosTuristicos.isEmpty()) {
+			System.out.println("----------- Lista Vacia -----------");
+		} else {
+			System.out.println("----------- Destinos Turisticos ------------");			
+			destinosTuristicos.forEach(destino -> System.out.println(destino));
+		}
 	}
 	public static void precargarPaises () {
 		if(paises == null) {
