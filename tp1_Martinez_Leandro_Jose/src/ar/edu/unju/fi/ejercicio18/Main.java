@@ -41,7 +41,7 @@ public class Main {
 					break;
 				case 2: mostrarDestinosTuristicos();
 					break;
-				case 3: System.out.println("opcion 3");
+				case 3: modificarPais();
 					break;
 				case 4: System.out.println("opcion 4");
 					break;
@@ -63,6 +63,31 @@ public class Main {
 		} catch(InputMismatchException ex){
 			System.out.println("Opcion no válida");
 		}
+	}
+	public static void modificarPais () {
+		System.out.print("Ingrese el código del destino turístico a modificar: ");
+		String codigoDestino = scanner.next();
+        boolean destinoEncontrado = false;
+        
+        for (DestinoTuristico destino : destinosTuristicos) {
+        	// verificamos si el codigo del destino es igual al codigo ingresado
+            if (destino.getCodigo().equalsIgnoreCase(codigoDestino)) {
+                System.out.print("Ingrese el nuevo código del país: ");
+                String nuevoCodigoPais = scanner.next();
+                for (Pais pais : paises) {
+                	// verificamos si el codigo del pais es igual al codigo ingresado
+                    if (pais.getCodigo().equalsIgnoreCase(nuevoCodigoPais)) {
+                        destino.setPais(pais);
+                        //destino.setNombre(pais.getNombre());
+                        System.out.println("País modificado correctamente.");
+                        destinoEncontrado = true;
+                    }
+                }
+            }
+        }
+        if (!destinoEncontrado) {
+            System.out.println("El código de destino turístico ingresado no es válido.");
+        }
 	}
 	public static void agregarDestino () {
 		DestinoTuristico destino = new DestinoTuristico();
