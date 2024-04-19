@@ -3,6 +3,8 @@ package ar.edu.unju.fi.ejercicio17;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,43 +18,47 @@ public class Main {
 		scanner = new Scanner(System.in);
 		jugadores = new ArrayList<>();
 		int option = 0;
-		do {
-			System.out.println("=======================");
-			System.out.println("1 - Alta de jugador");
-			System.out.println("2 - Mostrar los datos del jugador");
-			System.out.println("3 - Mostrar jugadores por apellido");
-			System.out.println("4 - Modificar jugador");
-			System.out.println("5 - Eliminar jugador");
-			System.out.println("6 - Mostrar cantidad de Jugadores");
-			System.out.println("7 - Mostrar jugadores por nacionalidad");
-			System.out.println("8 - Salir");
-			System.out.println("=======================");
-			
-			option = scanner.nextInt();
-			scanner.nextLine();
-			
-			switch (option) {
-			case 1: agregarJugador();
-				break;
-			case 2: mostrarDatosJugador();
-				break;
-			case 3: mostrarJugadoresPorApellido();;
-				break;
-			case 4: System.out.println("Opcion 4");
-				break;
-			case 5: System.out.println("Opcion 5");
-				break;
-			case 6: System.out.println("Total de jugadores: " + jugadores.size());
-				break;
-			case 7: mostrarJugadoresNacionalidad();
-				break;
-			case 8: System.out.println("Fin del programa...");
-				break;
-			default:
-				System.out.println("Opcion incorrecta");
-				break;
-			}
-		} while(option !=8);
+		try {
+			do {
+				System.out.println("=======================");
+				System.out.println("1 - Alta de jugador");
+				System.out.println("2 - Mostrar los datos del jugador");
+				System.out.println("3 - Mostrar jugadores por apellido");
+				System.out.println("4 - Modificar jugador");
+				System.out.println("5 - Eliminar jugador");
+				System.out.println("6 - Mostrar cantidad de Jugadores");
+				System.out.println("7 - Mostrar jugadores por nacionalidad");
+				System.out.println("8 - Salir");
+				System.out.println("=======================");
+				
+				option = scanner.nextInt();
+				scanner.nextLine();
+				
+				switch (option) {
+				case 1: agregarJugador();
+					break;
+				case 2: mostrarDatosJugador();
+					break;
+				case 3: mostrarJugadoresPorApellido();;
+					break;
+				case 4: modificarJugador();
+					break;
+				case 5: eliminarJugador();
+					break;
+				case 6: System.out.println("Total de jugadores: " + jugadores.size());
+					break;
+				case 7: mostrarJugadoresNacionalidad();
+					break;
+				case 8: System.out.println("Fin del programa...");
+					break;
+				default:
+					System.out.println("Opcion incorrecta");
+					break;
+				}
+			} while(option !=8);
+		} catch(InputMismatchException ex){
+			System.out.println("Ingrese numeros");
+		}
 	}
 	public static void mostrarJugadoresPorApellido() {
 		if(jugadores.isEmpty()) {
@@ -110,26 +116,103 @@ public class Main {
         }
 		System.out.println("Cantidad de jugadores con nacionalidad "+ nacionalidadIngresada +": "+ cantidad);
 	}
-	public static void mostrarDatosJugador() {
+	public static Jugador mostrarDatosJugador() {
 		System.out.println("Ingrese nombre del jugador: ");
 		String nombre = scanner.next();
 		System.out.println("Ingrese el apellido del jugador: ");
 		String apellido = scanner.next();
 		
+		Jugador player = null;
 		boolean encontrado = false;
+		
         for (Jugador jugador : jugadores) {
             if (jugador.getNombre().equalsIgnoreCase(nombre) &&
                 jugador.getApellido().equalsIgnoreCase(apellido)) {
                 System.out.println("Jugador encontrado:");
                 System.out.println(jugador);
                 encontrado = true;
-                break;
+                player = jugador;
             }
+             player = null;
         }
         if (!encontrado) {
             System.out.println("No se encontró ningún jugador con esos datos.");
         }
+        return player;
+	}
+	public static void modificarJugador () {
+		Jugador jugadorEncontrado = null;
+		Calendar fechaNacimiento = Calendar.getInstance();
+		System.out.println("Ingrese el nombre del jugador: ");
+		String nombreModificar = scanner.next();
+		
+		System.out.println("Ingrese el apellido del jugador: ");
+		String apellidoModificar = scanner.next();
+		
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNombre().equalsIgnoreCase(nombreModificar) &&
+                jugador.getApellido().equalsIgnoreCase(apellidoModificar)) {
+                jugadorEncontrado = jugador;
+                break;
+            }
+        }
+
+        if (jugadorEncontrado != null) {
+            // Modificar los datos del jugador
+            System.out.print("Ingrese el nuevo nombre del jugador: ");
+            jugadorEncontrado.setNombre(scanner.next());
+            
+            System.out.print("Ingrese el nuevo apellido del jugador: ");
+            jugadorEncontrado.setApellido(scanner.next());
+            scanner.nextLine();
+            
+            System.out.println("Ingrese la nueva fecha de nacimiento del jugador (dd/mm/yyyy): ");
+    		String fechaNacimientoStr = scanner.next();
+            String[] fechaParts = fechaNacimientoStr.split("/");
+            int day = Integer.parseInt(fechaParts[0]);
+            int month = Integer.parseInt(fechaParts[1]) - 1;
+            int year = Integer.parseInt(fechaParts[2]);
+            fechaNacimiento.set(year, month, day);
+            jugadorEncontrado.setFechaDeNacimiento(fechaNacimiento);
+            
+            System.out.println("Ingrese la nueva nacionalidad del jugador: ");
+            jugadorEncontrado.setNacionalidad(scanner.next());
+            
+            System.out.println("Ingrese la nueva estatura en"+ " cm "+"del jugador: ");
+            jugadorEncontrado.setEstatura(scanner.nextInt());
+            
+            System.out.println("Ingrese el nuevo peso del jugador: ");
+            jugadorEncontrado.setPeso(scanner.nextInt());
+            
+            System.out.println("Ingrese la nueva posicion del jugador: ");
+            jugadorEncontrado.setPosicion(scanner.next());
+            
+            System.out.println("Datos del jugador modificados correctamente.");
+        } else {
+            System.out.println("No se encontró ningún jugador con ese nombre y apellido.");
+        }
 
 	}
-	
+	public static void eliminarJugador() {
+		System.out.println("Ingrese el nombre del jugador: ");
+		String nombre = scanner.next();
+		
+		System.out.println("Ingrese el apellido del jugador: ");
+		String apellido = scanner.next();
+		
+		Iterator<Jugador> iterator = jugadores.iterator();
+        boolean jugadorEncontrado = false;
+
+        while (iterator.hasNext()) {
+            Jugador jugador = iterator.next();
+            if (jugador.getNombre().equalsIgnoreCase(nombre) && jugador.getApellido().equalsIgnoreCase(apellido)) {
+                iterator.remove();
+                System.out.println("Jugador eliminado correctamente.");
+                jugadorEncontrado = true;
+            }
+        }
+        if (!jugadorEncontrado) {
+        	System.out.println("No se encontró ningún jugador con ese nombre y apellido.");
+        }
+	}
 }
